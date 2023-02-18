@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 import '../services/firebase_services.dart';
 
@@ -10,7 +12,19 @@ class Forms extends StatefulWidget {
 }
 
 class _formsState extends State<Forms> {
-  TextEditingController nameController =TextEditingController(text: ""); //en el controller se gurda la indo
+  final _nameController = TextEditingController();
+  File? _image;
+
+  Future<void> _pickImage() async {
+    final pickedImage =
+        await ImagePicker().getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      setState(() {
+        _image = File(pickedImage.path);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,16 +36,22 @@ class _formsState extends State<Forms> {
           child: Column(
             children: [
               TextField(
-                controller: nameController,
+                controller: _nameController,
                 decoration: const InputDecoration(
                   hintText: 'Nombre del producto',
                 ),
               ),
               ElevatedButton(
+                  onPressed: _pickImage,
+                  child: const Text('Seleccionar imagen')),
+              if (_image != null)
+                Image.file(_image!), // Muestra la imagen seleccionada
+              ElevatedButton(
                   onPressed: () async {
-                    await addProducts(nameController.text).then((_) => {
-                          Navigator.pop(context),
-                        });
+                    await addProducts(_nameController.text, _image)
+                        .then((_) => {
+                              Navigator.pop(context),
+                            });
                   },
                   child: const Text('Guardar'))
             ],
