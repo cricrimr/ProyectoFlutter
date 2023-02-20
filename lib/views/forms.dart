@@ -1,6 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+
 import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:proyectop_flutter/services/seleccionarImagen.dart';
 
 import '../services/firebase_services.dart';
 
@@ -12,19 +14,10 @@ class Forms extends StatefulWidget {
 }
 
 class _formsState extends State<Forms> {
-  final _nameController = TextEditingController();
-  File? _image;
+  File? imagen_to_upload;
 
-  Future<void> _pickImage() async {
-    final pickedImage =
-        await ImagePicker().getImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      setState(() {
-        _image = File(pickedImage.path);
-      });
-    }
-  }
-
+  TextEditingController nameController =
+      TextEditingController(text: ""); //en el controller se gurda la indo
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,24 +29,34 @@ class _formsState extends State<Forms> {
           child: Column(
             children: [
               TextField(
-                controller: _nameController,
+                controller: nameController,
                 decoration: const InputDecoration(
                   hintText: 'Nombre del producto',
                 ),
               ),
-              ElevatedButton(
-                  onPressed: _pickImage,
-                  child: const Text('Seleccionar imagen')),
-              if (_image != null)
-                Image.file(_image!), // Muestra la imagen seleccionada
+              imagen_to_upload != null ? Image.file(imagen_to_upload!): Container(
+                margin: EdgeInsets.all(10),
+                height: 200,
+                width: double.infinity,
+                color: Colors.red,
+              ),
               ElevatedButton(
                   onPressed: () async {
-                    await addProducts(_nameController.text, _image)
-                        .then((_) => {
-                              Navigator.pop(context),
-                            });
+                    final imagen = await getImagen();
+                    setState(() {
+                      imagen_to_upload = File(imagen!.path);
+                    });
                   },
-                  child: const Text('Guardar'))
+                  child: const Text('Seleccionar imagen')),
+              Container(
+                child: ElevatedButton(
+                    onPressed: () async {
+                      await addProducts(nameController.text).then((_) => {
+                            Navigator.pop(context),
+                          });
+                    },
+                    child: const Text('Guardar')),
+              ),
             ],
           ),
         ));
