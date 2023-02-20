@@ -72,6 +72,8 @@ class _HomeState extends State<Home> {
                       direction: DismissDirection.endToStart,
                       key: Key(snapshot.data![index]['id']),
                       child: ListTile(
+                        leading:
+                            Image.network(snapshot.data![index]['imageUrl']),
                         title: Text(snapshot.data![index]['name']),
                         onTap: (() async {
                           await Navigator.pushNamed(context, "/edit",

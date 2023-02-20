@@ -1,10 +1,10 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:proyectop_flutter/services/seleccionarImagen.dart';
 
 import '../services/firebase_services.dart';
+import '../services/seleccionarImagen.dart'; // importar la función subirImagen
 
 class Forms extends StatefulWidget {
   const Forms({super.key});
@@ -15,9 +15,10 @@ class Forms extends StatefulWidget {
 
 class _formsState extends State<Forms> {
   File? imagen_to_upload;
-
+  String? imageUrl;
   TextEditingController nameController =
       TextEditingController(text: ""); //en el controller se gurda la indo
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +35,14 @@ class _formsState extends State<Forms> {
                   hintText: 'Nombre del producto',
                 ),
               ),
-              imagen_to_upload != null ? Image.file(imagen_to_upload!): Container(
-                margin: EdgeInsets.all(10),
-                height: 200,
-                width: double.infinity,
-                color: Colors.red,
-              ),
+              imagen_to_upload != null
+                  ? Image.file(imagen_to_upload!)
+                  : Container(
+                      margin: EdgeInsets.all(10),
+                      height: 200,
+                      width: double.infinity,
+                      color: Colors.red,
+                    ),
               ElevatedButton(
                   onPressed: () async {
                     final imagen = await getImagen();
@@ -51,9 +54,17 @@ class _formsState extends State<Forms> {
               Container(
                 child: ElevatedButton(
                     onPressed: () async {
-                      await addProducts(nameController.text).then((_) => {
-                            Navigator.pop(context),
-                          });
+                      if (imagen_to_upload == null) {
+                        return;
+                      }
+                      final uploaded = await subirImagen(imagen_to_upload!);
+
+                      final imageUrl = await subirImagen(imagen_to_upload!);
+
+                      await addProducts(nameController.text, imageUrl)
+                          .then((_) => {
+                                Navigator.pop(context),
+                              });
                     },
                     child: const Text('Guardar')),
               ),
