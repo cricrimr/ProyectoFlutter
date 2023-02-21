@@ -47,7 +47,7 @@ class _formsState extends State<Forms> {
                   ? Image.file(imagen_to_upload!)
                   : Container(
                       margin: EdgeInsets.all(10),
-                      height: 200,
+                      height: 100,
                       width: double.infinity,
                       color: Colors.red,
                     ),
