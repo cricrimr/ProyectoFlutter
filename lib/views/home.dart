@@ -74,7 +74,14 @@ class _HomeState extends State<Home> {
                       child: ListTile(
                         leading:
                             Image.network(snapshot.data![index]['imageUrl']),
+                        subtitle: Text(snapshot.data![index]['price']),
                         title: Text(snapshot.data![index]['name']),
+                        trailing: ElevatedButton(
+                          onPressed: () {
+                            // Agregar producto al carrito
+                          },
+                          child: Text('Agregar al carrito'),
+                        ),
                         onTap: (() async {
                           await Navigator.pushNamed(context, "/edit",
                               arguments: {

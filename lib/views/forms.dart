@@ -18,6 +18,8 @@ class _formsState extends State<Forms> {
   String? imageUrl;
   TextEditingController nameController =
       TextEditingController(text: ""); //en el controller se gurda la indo
+  TextEditingController PriceController =
+      TextEditingController(text: ""); //en el controller se gurda la indo
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +35,12 @@ class _formsState extends State<Forms> {
                 controller: nameController,
                 decoration: const InputDecoration(
                   hintText: 'Nombre del producto',
+                ),
+              ),
+              TextField(
+                controller: PriceController,
+                decoration: const InputDecoration(
+                  hintText: 'Precio del producto',
                 ),
               ),
               imagen_to_upload != null
@@ -61,7 +69,7 @@ class _formsState extends State<Forms> {
 
                       final imageUrl = await subirImagen(imagen_to_upload!);
 
-                      await addProducts(nameController.text, imageUrl)
+                      await addProducts(nameController.text, imageUrl,PriceController.text)
                           .then((_) => {
                                 Navigator.pop(context),
                               });
