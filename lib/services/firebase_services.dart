@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 final FirebaseStorage storage = FirebaseStorage.instance;
 
 FirebaseFirestore db =
-    FirebaseFirestore.instance; //se crea instacia de las base de datis
+    FirebaseFirestore.instance; 
 
 // un future es algo que va venri en un futuro es como las promesas en js
 Future<String> subirImagen(File image) async {
@@ -47,9 +47,7 @@ Future<List> getPeople() async {
 
 // lo de mayor y menos esl oque regresa la funcion
 Future<void> addProducts(String name, String imageUrl, String price) async {
-  await db
-      .collection("articulos")
-      .add({"name": name, "imageUrl": imageUrl, "price": price});
+  await db.collection("articulos").add({"name": name, "imageUrl": imageUrl, "price": price});
 }
 
 // actualizar
