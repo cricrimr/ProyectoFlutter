@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:proyectop_flutter/views/home.dart';
 import 'Student.dart';
 import 'Teacher.dart';
 import 'register.dart';
@@ -259,14 +260,14 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const Teacher(),
+              builder: (context) => const Home(),
             ),
           );
         } else {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) => const Student(),
+              builder: (context) => const Home(),
             ),
           );
         }
