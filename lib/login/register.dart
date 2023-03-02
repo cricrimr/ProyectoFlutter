@@ -93,7 +93,7 @@ class _RegisterState extends State<Register> {
                             decoration: InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Email',
+                              hintText: 'Correo electronico',
                               enabled: true,
                               contentPadding: const EdgeInsets.only(
                                   left: 14.0, bottom: 8.0, top: 8.0),
@@ -108,12 +108,12 @@ class _RegisterState extends State<Register> {
                             ),
                             validator: (value) {
                               if (value!.length == 0) {
-                                return "Email cannot be empty";
+                                return "El correo electrónico no puede estar vacío";
                               }
                               if (!RegExp(
                                       "^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+.[a-z]")
                                   .hasMatch(value)) {
-                                return ("Please enter a valid email");
+                                return ("Por favor introduzca una dirección de correo electrónico válida");
                               } else {
                                 return null;
                               }
@@ -148,7 +148,7 @@ class _RegisterState extends State<Register> {
                                   }),
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Password',
+                              hintText: 'Contraseña',
                               enabled: true,
                               contentPadding: const EdgeInsets.only(
                                   left: 14.0, bottom: 8.0, top: 15.0),
@@ -164,10 +164,10 @@ class _RegisterState extends State<Register> {
                             validator: (value) {
                               RegExp regex = new RegExp(r'^.{6,}$');
                               if (value!.isEmpty) {
-                                return "Password cannot be empty";
+                                return "La contraseña no puede estar vacía";
                               }
                               if (!regex.hasMatch(value)) {
-                                return ("please enter valid password min. 6 character");
+                                return ("por favor ingrese una contraseña válida min. 6 caracteres");
                               } else {
                                 return null;
                               }
@@ -201,7 +201,7 @@ class _RegisterState extends State<Register> {
                                   }),
                               filled: true,
                               fillColor: Colors.white,
-                              hintText: 'Confirm Password',
+                              hintText: 'Repetir contraseña',
                               enabled: true,
                               contentPadding: const EdgeInsets.only(
                                   left: 14.0, bottom: 8.0, top: 15.0),
@@ -216,11 +216,11 @@ class _RegisterState extends State<Register> {
                             ),
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return "Password cannot be empty";
+                                return "La contraseña no puede estar vacía";
                               }
                               if (confirmpassController.text !=
                                   passwordController.text) {
-                                return "Password did not match";
+                                return "La contraseña no coincide";
                               } else {
                                 return null;
                               }
