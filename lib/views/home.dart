@@ -8,10 +8,10 @@ class Home extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<Home> createState() => _HomeUserState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeUserState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -79,69 +79,77 @@ class _HomeState extends State<Home> {
                       });
                       setState(() {});
                     }),
-                    child: Column(
-                      children: [
-                        Container(
-                          width: 250.0,
-                          height: 200.0,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 1,
-                                blurRadius: 2,
-                                offset: Offset(0, 1),
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 25.0),
+                      child: Row(
+                        children: <Widget>[
+                          Container(
+                            width: 100.0,
+                            height: 100.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
                               ),
-                            ],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image.network(
-                              snapshot.data![index]['imageUrl'],
-                              fit: BoxFit.cover,
+                              image: DecorationImage(
+                                image: NetworkImage(
+                                    snapshot.data![index]['imageUrl']),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.all(16.0),
-                          child: Text(
-                            snapshot.data![index]['name'],
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                snapshot.data![index]['price'],
-                                style: TextStyle(
-                                  fontSize: 16.0,
+                          SizedBox(width: 20.0),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                SizedBox(height: 20.0),
+                                Text(
+                                  snapshot.data![index]['name'],
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  // Agregar producto al carrito
-                                },
-                                child: Text('Agregar al carrito'),
-                              ),
-                            ],
+                                SizedBox(height: 10.0),
+                                Text(
+                                  snapshot.data![index]['price'],
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                                SizedBox(height: 10.0),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    // Agregar producto al carrito
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Color(0xFF016BC1)),
+                                  child: Text('Agregar al carrito'),
+                                ),
+                                SizedBox(height: 10.0),
+                                Text(
+                                  "Pantalla de 2 pulgadas",
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                    color: Colors.grey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 16.0,
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );
               },
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text("Error al cargar los productos"),
             );
           } else {
             return const Center(
@@ -152,7 +160,7 @@ class _HomeState extends State<Home> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.pushNamed(context, '/add');
+          await Navigator.pushNamed(context, "/add");
           setState(() {});
         },
         child: const Icon(Icons.add),

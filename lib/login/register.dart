@@ -29,7 +29,7 @@ class _RegisterState extends State<Register> {
   bool _isObscure2 = true;
   File? file;
 
-  var rool = "Student";
+  var rool = "Teacher";
 
   @override
   Widget build(BuildContext context) {
