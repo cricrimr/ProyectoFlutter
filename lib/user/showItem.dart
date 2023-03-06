@@ -36,6 +36,7 @@ class _EditState extends State<itemGen> {
     int price = int.parse(priceController.text);
 
     double discountPercent = ((price - priceLow) / price) * 100;
+    int priceLowDivided = priceLow ~/ 12;
 
 // Redondea el porcentaje a dos decimales
     discountPercent = double.parse(discountPercent.toStringAsFixed(2));
@@ -55,9 +56,11 @@ class _EditState extends State<itemGen> {
                 padding: EdgeInsets.all(1.0),
                 child: Text(
                   descripcionController.text,
-                  style: const TextStyle(fontSize: 17),
+                  style: const TextStyle(
+                      fontSize: 17, fontWeight: FontWeight.bold),
                 ),
               ),
+              const SizedBox(height: 10),
               Container(
                 height: 200,
                 width: double.infinity,
@@ -77,16 +80,6 @@ class _EditState extends State<itemGen> {
                 ),
               ),
               const SizedBox(height: 20),
-              // Text(
-              //   nameController.text,
-              //   style: const TextStyle(fontSize: 20),
-              // ),
-              // const SizedBox(height: 10),
-              // Text(
-              //   descripcionController.text,
-              //   style: const TextStyle(fontSize: 16),
-              // ),
-              const SizedBox(height: 20),
               Text(
                 '\$${priceController.text}',
                 style: const TextStyle(
@@ -97,7 +90,7 @@ class _EditState extends State<itemGen> {
                   decorationThickness: 2, // Gro
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 5),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -113,14 +106,15 @@ class _EditState extends State<itemGen> {
                   ),
                 ],
               ),
-
-              const SizedBox(height: 20),
               Text(
-                'Cantidad disponible: ${cantidadController.text}',
+                'en 12 x ${priceLowDivided} SIN INTERESES',
                 style: const TextStyle(fontSize: 16),
               ),
-
-              const SizedBox(height: 20),
+              Text(
+                'IVA incluido',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 10),
               Text(
                 'Entrega: ${entregaController.text} ${tEntregaController.text}',
                 style: const TextStyle(fontSize: 16),
@@ -131,11 +125,59 @@ class _EditState extends State<itemGen> {
                 style: const TextStyle(fontSize: 16),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async {
-                  // Aquí iría el código para realizar la compra del producto
-                },
-                child: const Text('Comprar'),
+              Text(
+                'Devolución gratis',
+                style: const TextStyle(fontSize: 16),
+              ),
+              Text(
+                'Tienes 30 días desde que lo recibes.',
+                style: const TextStyle(fontSize: 16),
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Stock disponible',
+                style: const TextStyle(fontSize: 16),
+              ),
+              MaterialButton(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                height: 40,
+                minWidth: 400,
+                onPressed: () {},
+                color: Color(0xFFE8E8E8),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Cantidad : (${cantidadController.text} disponibles)",
+                    style: TextStyle(fontSize: 15, color: Colors.black),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 10),
+              MaterialButton(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                height: 40,
+                minWidth: 400,
+                onPressed: () {},
+                child: const Text(
+                  "Comprar",
+                  style: TextStyle(fontSize: 15, color: Colors.white),
+                ),
+                color: Color(0xFF016BC1),
+              ),
+              const SizedBox(height: 5),
+              MaterialButton(
+                shape: const RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(6.0))),
+                height: 40,
+                minWidth: 400,
+                onPressed: () {},
+                child: const Text(
+                  "Agregar al carrito",
+                  style: TextStyle(fontSize: 15, color: Color(0xFF016BC1)),
+                ),
+                color: Color(0xFFE3EDFB),
               ),
             ],
           ),
