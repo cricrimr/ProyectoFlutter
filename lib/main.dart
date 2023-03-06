@@ -9,6 +9,7 @@ import 'package:proyectop_flutter/views/edit.dart';
 import 'package:proyectop_flutter/views/forms.dart';
 import 'package:proyectop_flutter/views/home.dart';
 // import 'package:proyectop_flutter/views/login.dart';
+import 'Factura/Reporte.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -28,10 +29,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Productos',
       routes: {
-        '/': (context) => const HomeUser(),
+        '/': (context) => LoginPage(),
         '/add': (context) => const Forms(),
         '/edit': (context) => const edit(),
         '/item': (context) => const itemGen(),
+        '/reporte': (context) => Reporte(),
       },
     );
   }

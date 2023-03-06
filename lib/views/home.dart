@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../desing/drawer.dart';
 import '../services/firebase_services.dart';
 
 class Home extends StatefulWidget {
@@ -18,6 +19,7 @@ class _HomeUserState extends State<Home> {
       appBar: AppBar(
         title: const Text('Productos Vista administrador'),
       ),
+      drawer: drawerPlantilla(),
       body: FutureBuilder(
         future: getPeople(),
         builder: (context, snapshot) {
@@ -75,6 +77,15 @@ class _HomeUserState extends State<Home> {
                     onTap: (() async {
                       await Navigator.pushNamed(context, "/edit", arguments: {
                         'name': snapshot.data![index]['name'],
+                        'descripcion': snapshot.data![index]['descripcion'],
+                        'imageUrl': snapshot.data![index]['imageUrl'],
+                        'price': snapshot.data![index]['price'],
+                        'priceLow': snapshot.data![index]['priceLow'],
+                        'tEntrega': snapshot.data![index]['tEntrega'],
+                        'entrega': snapshot.data![index]['entrega'],
+                        'cantidad': snapshot.data![index]['cantidad'],
+                        'imageUrl': snapshot.data![index]['imageUrl'],
+                        'edia': snapshot.data![index]['edia'],
                         'id': snapshot.data![index]['id']
                       });
                       setState(() {});
@@ -127,16 +138,9 @@ class _HomeUserState extends State<Home> {
                                   },
                                   style: ElevatedButton.styleFrom(
                                       primary: Color(0xFF016BC1)),
-                                  child: Text('Agregar al carrito'),
+                                  child: Text('Actualizar'),
                                 ),
                                 SizedBox(height: 10.0),
-                                Text(
-                                  "Pantalla de 2 pulgadas",
-                                  style: TextStyle(
-                                    fontSize: 16.0,
-                                    color: Colors.grey[600],
-                                  ),
-                                ),
                               ],
                             ),
                           ),

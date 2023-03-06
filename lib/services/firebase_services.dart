@@ -1,12 +1,13 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 final FirebaseStorage storage = FirebaseStorage.instance;
+final FirebaseAuth _auth = FirebaseAuth.instance;
 
-FirebaseFirestore db =
-    FirebaseFirestore.instance; 
+FirebaseFirestore db = FirebaseFirestore.instance;
 
 // un future es algo que va venri en un futuro es como las promesas en js
 Future<String> subirImagen(File image) async {
@@ -36,8 +37,14 @@ Future<List> getPeople() async {
     final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
     final producto = {
       "imageUrl": data['imageUrl'],
+      "descripcion": data['descripcion'],
       "name": data['name'],
       "price": data['price'],
+      "priceLow": data['priceLow'],
+      "entrega": data['entrega'],
+      "tEntrega": data['tEntrega'],
+      "cantidad": data['cantidad'],
+      "edia": data['edia'],
       "id": documento.id,
     };
     people.add(producto);
@@ -46,13 +53,52 @@ Future<List> getPeople() async {
 }
 
 // lo de mayor y menos esl oque regresa la funcion
-Future<void> addProducts(String name, String imageUrl, String price) async {
-  await db.collection("articulos").add({"name": name, "imageUrl": imageUrl, "price": price});
+Future<void> addProducts(
+    String name,
+    String descripcion,
+    String imageUrl,
+    String price,
+    String priceLow,
+    String entrega,
+    String tEntrega,
+    String eDia,
+    String cantidad) async {
+  await db.collection("articulos").add({
+    "name": name,
+    "imageUrl": imageUrl,
+    "price": price,
+    "descripcion": descripcion,
+    "priceLow": priceLow,
+    "entrega": entrega,
+    "tEntrega": tEntrega,
+    "edia": eDia,
+    "cantidad": cantidad,
+  });
 }
 
 // actualizar
-Future<void> editProducts(String id, String nuevoNombre) async {
-  await db.collection("articulos").doc(id).set({"name": nuevoNombre});
+Future<void> editProducts(
+    String id,
+    String nuevoNombre,
+    String nuevadescripcion,
+    String nuevaimageUrl,
+    String nuevoprice,
+    String nuevopriceLow,
+    String nuevoentrega,
+    String nuevatEntrega,
+    String nuevaeDia,
+    String nuevacantidad) async {
+  await db.collection("articulos").doc(id).set({
+    "name": nuevoNombre,
+    "descripcion": nuevadescripcion,
+    "imageUrl":nuevaimageUrl,
+    "price": nuevoprice,
+    "priceLow": nuevopriceLow,
+    "entrega": nuevatEntrega,
+    "tEntrega": nuevatEntrega,
+    "edia": nuevaeDia,
+    "cantidad": nuevacantidad
+  });
 }
 
 // eliminar

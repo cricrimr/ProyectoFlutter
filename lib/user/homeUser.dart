@@ -1,4 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:proyectop_flutter/desing/appBar.dart';
+import 'package:proyectop_flutter/desing/drawer.dart';
+import 'package:proyectop_flutter/login/login.dart';
 
 import '../services/firebase_services.dart';
 
@@ -17,9 +21,8 @@ class _HomeUserState extends State<HomeUser> {
     return Container(
       color: const Color(0xFFF5F5F5),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Productos Vista Usuario'),
-        ),
+        appBar: MyAppBar(),
+        drawer: drawerPlantilla(),
         body: FutureBuilder(
           future: getPeople(),
           builder: (context, snapshot) {
@@ -96,12 +99,28 @@ class _HomeUserState extends State<HomeUser> {
                                   child: ElevatedButton(
                                     onPressed: () async {
                                       await Navigator.pushNamed(
-                                          context, "/item", arguments: {
-                                        'name': snapshot.data![index]['name'],
-                                        'imageUrl': snapshot.data![index]['imageUrl'],
-                                        'price': snapshot.data![index]['price'],
-                                        'id': snapshot.data![index]['id']
-                                      });
+                                          context, "/item",
+                                          arguments: {
+                                            'name': snapshot.data![index]
+                                                ['name'],
+                                            'descripcion': snapshot.data![index]
+                                                ['descripcion'],
+                                            'imageUrl': snapshot.data![index]
+                                                ['imageUrl'],
+                                            'price': snapshot.data![index]
+                                                ['price'],
+                                            'priceLow': snapshot.data![index]
+                                                ['priceLow'],
+                                            'entrega': snapshot.data![index]
+                                                ['entrega'],
+                                            'tEntrega': snapshot.data![index]
+                                                ['tEntrega'],
+                                            'cantidad': snapshot.data![index]
+                                                ['cantidad'],
+                                            'edia': snapshot.data![index]
+                                                ['edia'],
+                                            'id': snapshot.data![index]['id']
+                                          });
                                       setState(() {});
                                     },
                                     child: Text('Carrito'),
