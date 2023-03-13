@@ -99,5 +99,3 @@ class _HomeState extends State<Reporte> {
     );
   }
 }
-
-

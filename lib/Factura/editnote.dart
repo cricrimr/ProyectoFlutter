@@ -15,16 +15,16 @@ class _editnoteState extends State<editnote> {
   DocumentSnapshot docid;
   _editnoteState({required this.docid});
   TextEditingController name = TextEditingController();
-  TextEditingController subject1 = TextEditingController();
-  TextEditingController subject2 = TextEditingController();
-  TextEditingController subject3 = TextEditingController();
+  TextEditingController descripcion = TextEditingController();
+  TextEditingController edia = TextEditingController();
+  TextEditingController imageUrl = TextEditingController();
 
   @override
   void initState() {
     name = TextEditingController(text: widget.docid.get('name'));
-    subject1 = TextEditingController(text: widget.docid.get('Maths'));
-    subject2 = TextEditingController(text: widget.docid.get('Science'));
-    subject3 = TextEditingController(text: widget.docid.get('History'));
+    descripcion = TextEditingController(text: widget.docid.get('descripcion'));
+    edia = TextEditingController(text: widget.docid.get('edia'));
+    imageUrl = TextEditingController(text: widget.docid.get('imageUrl'));
 
     super.initState();
   }
@@ -34,137 +34,71 @@ class _editnoteState extends State<editnote> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 0, 11, 133),
-        actions: [
-          MaterialButton(
-            onPressed: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => Reporte()));
-            },
-            child: Text(
-              "Back",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 251, 251, 251),
-              ),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () {
-              widget.docid.reference.update({
-                'name': name.text,
-                'Maths': subject1.text,
-                'Science': subject2.text,
-                'History': subject3.text
-              }).whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Reporte()));
-              });
-            },
-            child: Text(
-              "save",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 251, 251, 251),
-              ),
-            ),
-          ),
-          MaterialButton(
-            onPressed: () {
-              widget.docid.reference.delete().whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => Reporte()));
-              });
-            },
-            child: Text(
-              "delete",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 251, 251, 251),
-              ),
-            ),
-          ),
-        ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: [
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: Text(
+                name.text,
               ),
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: Text(
-                  name.text,
-                ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: Text(descripcion.text),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: Text(
+                edia.text,
               ),
-              SizedBox(
-                height: 10,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: Text(
+                imageUrl.text,
               ),
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  controller: subject1,
-                  maxLines: null,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'Maths',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  controller: subject2,
-                  maxLines: null,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'Science',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(border: Border.all()),
-                child: TextField(
-                  controller: subject3,
-                  maxLines: null,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    hintText: 'History',
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              MaterialButton(
-                color: Color.fromARGB(255, 0, 11, 133),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => reportt(
-                        docid: docid,
-                      ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            MaterialButton(
+              color: Color.fromARGB(255, 0, 11, 133),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => reportt(
+                      docid: docid,
                     ),
-                  );
-                },
-                child: Text(
-                  "Make Report",
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Color.fromARGB(255, 251, 251, 251),
                   ),
+                );
+              },
+              child: Text(
+                "Generar reporte",
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Color.fromARGB(255, 251, 251, 251),
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

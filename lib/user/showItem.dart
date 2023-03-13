@@ -159,7 +159,19 @@ class _EditState extends State<itemGen> {
                     borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 height: 40,
                 minWidth: 400,
-                onPressed: () {},
+                onPressed: () async {
+                  await addReport(
+                          nameController.text,
+                          descripcionController.text,
+                          imageUrlController.text,
+                          priceLowController.text,
+                          entregaController.text,
+                          tEntregaController.text,
+                          eDiaController.text)
+                      .then((_) => {
+                            Navigator.pop(context),
+                          });
+                },
                 child: const Text(
                   "Comprar",
                   style: TextStyle(fontSize: 15, color: Colors.white),

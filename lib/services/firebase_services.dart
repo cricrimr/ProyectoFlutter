@@ -52,6 +52,48 @@ Future<List> getPeople() async {
   return people; // y se retonar las personas
 }
 
+
+Future<List> getPeopleLow() async {
+  // funcion asincrona
+  List people = []; // se inicializa vacia
+  // se habla a la bd osea se hace una refencia para poder traer la coleccion
+  CollectionReference collectionReferenceProducts = db.collection('articulos');
+  //query
+  //cuiando se usa el get que sean procos registros
+  QuerySnapshot queryProduts = await collectionReferenceProducts
+      .get(); //esto nos va trer todos los datos que existan en la coleccion
+  queryProduts.docs.forEach((documento) {
+    //aqui agregamos la data de la db en la lista people
+    final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
+    final producto = {
+      "imageUrl": data['imageUrl'],
+      "descripcion": data['descripcion'],
+      "name": data['name'],
+      "price": data['price'],
+      "priceLow": data['priceLow'],
+      "entrega": data['entrega'],
+      "tEntrega": data['tEntrega'],
+      "cantidad": data['cantidad'],
+      "edia": data['edia'],
+      "id": documento.id,
+    };
+    people.add(producto);
+  });
+  return people; // y se retonar las personas
+}
+
+Future<List> filterProductsByPrice(double maxPrice) async {
+  List products = await getPeople();
+  List filteredProducts = [];
+  for (var product in products) {
+    double price = double.tryParse(product['priceLow']) ?? double.tryParse(product['price']) ?? 0;
+    if (price <= maxPrice) {
+      filteredProducts.add(product);
+    }
+  }
+  return filteredProducts;
+}
+
 // lo de mayor y menos esl oque regresa la funcion
 Future<void> addProducts(
     String name,
@@ -75,6 +117,27 @@ Future<void> addProducts(
     "cantidad": cantidad,
   });
 }
+
+
+Future<void> addReport(
+    String name,
+    String descripcion,
+    String imageUrl,
+    String priceLow,
+    String entrega,
+    String tEntrega,
+    String eDia,) async {
+  await db.collection("report").add({
+    "name": name,
+    "imageUrl": imageUrl,
+    "descripcion": descripcion,
+    "priceLow": priceLow,
+    "entrega": entrega,
+    "tEntrega": tEntrega,
+    "edia": eDia,
+  });
+}
+
 
 // actualizar
 Future<void> editProducts(

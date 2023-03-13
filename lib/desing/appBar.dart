@@ -14,6 +14,20 @@ class _MyAppBarState extends State<MyAppBar> {
     return AppBar(
       backgroundColor: Color(0xFF016BC1),
       title: Text('Bienvenido'),
+      actions: <Widget>[
+        IconButton(
+          icon: Icon(Icons.expand_more),
+          onPressed: () {
+            // Acción al presionar el botón de buscar
+          },
+        ),
+        IconButton(
+          icon: Icon(Icons.expand_less),
+          onPressed: () {
+            // Acción al presionar el botón de buscar
+          },
+        ),
+      ],
     );
   }
 }
