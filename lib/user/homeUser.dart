@@ -124,6 +124,11 @@ class _HomeUserState extends State<HomeUser> {
                                       setState(() {});
                                     },
                                     child: Text('Ver'),
+                                    style: ButtonStyle(
+                                      backgroundColor:
+                                          MaterialStateProperty.all<Color>(
+                                              Color(0xFF016BC1)),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -152,6 +157,7 @@ class _HomeUserState extends State<HomeUser> {
             setState(() {});
           },
           child: const Icon(Icons.shopping_cart),
+          backgroundColor: Color(0xFF016BC1),
         ),
       ),
     );

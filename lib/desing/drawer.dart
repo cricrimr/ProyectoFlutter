@@ -15,7 +15,7 @@ class drawerPlantilla extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Color(0xFF016BC1),
             ),
             child: Image.asset(
               'assets/imagenPubli.webp',

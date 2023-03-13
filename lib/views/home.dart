@@ -17,6 +17,7 @@ class _HomeUserState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF016BC1),
         title: const Text('Productos Vista administrador'),
       ),
       drawer: drawerPlantilla(),
@@ -168,6 +169,7 @@ class _HomeUserState extends State<Home> {
           setState(() {});
         },
         child: const Icon(Icons.add),
+        backgroundColor: Color(0xFF016BC1),
       ),
     );
   }

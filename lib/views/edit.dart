@@ -39,6 +39,7 @@ class _editState extends State<edit> {
     String dropdownValueDia = 'Lunes';
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF016BC1),
           title: const Text('Editar'),
         ),
         body: SingleChildScrollView(
@@ -196,23 +197,28 @@ class _editState extends State<edit> {
                   ],
                 ),
                 ElevatedButton(
-                    onPressed: () async {
-                      await editProducts(
-                              argumentos['id'],
-                              nameController.text,
-                              descripcionController.text,
-                              imageUrlController.text,
-                              priceController.text,
-                              priceLowController.text,
-                              dropdownValue,
-                              dropdownValuePrecio,
-                              dropdownValueDia,
-                              cantidadController.text)
-                          .then((_) {
-                        Navigator.pop(context);
-                      });
-                    },
-                    child: const Text('Actualizar'))
+                  onPressed: () async {
+                    await editProducts(
+                            argumentos['id'],
+                            nameController.text,
+                            descripcionController.text,
+                            imageUrlController.text,
+                            priceController.text,
+                            priceLowController.text,
+                            dropdownValue,
+                            dropdownValuePrecio,
+                            dropdownValueDia,
+                            cantidadController.text)
+                        .then((_) {
+                      Navigator.pop(context);
+                    });
+                  },
+                  child: const Text('Actualizar'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFF016BC1)),
+                  ),
+                ),
               ],
             ),
           ),

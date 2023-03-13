@@ -36,6 +36,7 @@ class _formsState extends State<Forms> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFF016BC1),
           title: const Text('Formulario'),
         ),
         drawer: const drawerPlantilla(),
@@ -226,38 +227,48 @@ class _formsState extends State<Forms> {
                         color: Colors.grey[200],
                       ),
                 ElevatedButton(
-                    onPressed: () async {
-                      final imagen = await getImagen();
-                      setState(() {
-                        imagen_to_upload = File(imagen!.path);
-                      });
-                    },
-                    child: const Text('Seleccionar imagen')),
+                  onPressed: () async {
+                    final imagen = await getImagen();
+                    setState(() {
+                      imagen_to_upload = File(imagen!.path);
+                    });
+                  },
+                  child: const Text('Seleccionar imagen'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFF016BC1)),
+                  ),
+                ),
                 Container(
                   child: ElevatedButton(
-                      onPressed: () async {
-                        if (imagen_to_upload == null) {
-                          return;
-                        }
-                        final uploaded = await subirImagen(imagen_to_upload!);
+                    onPressed: () async {
+                      if (imagen_to_upload == null) {
+                        return;
+                      }
+                      final uploaded = await subirImagen(imagen_to_upload!);
 
-                        final imageUrl = await subirImagen(imagen_to_upload!);
+                      final imageUrl = await subirImagen(imagen_to_upload!);
 
-                        await addProducts(
-                                nameController.text,
-                                descripcion.text,
-                                imageUrl,
-                                PriceController.text,
-                                lowController.text,
-                                dropdownValue,
-                                dropdownValuePrecio,
-                                dropdownValueDia,
-                                contidadStock.text)
-                            .then((_) => {
-                                  Navigator.pop(context),
-                                });
-                      },
-                      child: const Text('Guardar')),
+                      await addProducts(
+                              nameController.text,
+                              descripcion.text,
+                              imageUrl,
+                              PriceController.text,
+                              lowController.text,
+                              dropdownValue,
+                              dropdownValuePrecio,
+                              dropdownValueDia,
+                              contidadStock.text)
+                          .then((_) => {
+                                Navigator.pop(context),
+                              });
+                    },
+                    child: const Text('Guardar'),
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Color(0xFF016BC1)),
+                    ),
+                  ),
                 ),
               ],
             ),
