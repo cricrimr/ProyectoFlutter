@@ -184,7 +184,21 @@ class _EditState extends State<itemGen> {
                     borderRadius: BorderRadius.all(Radius.circular(6.0))),
                 height: 40,
                 minWidth: 400,
-                onPressed: () {},
+                onPressed: () async {
+                  await addShoppincard(
+                    nameController.text,
+                    descripcionController.text,
+                    imageUrlController.text,
+                    priceController.text,
+                    priceLowController.text,
+                    entregaController.text,
+                    tEntregaController.text,
+                    eDiaController.text,
+                    cantidadController.text,
+                  ).then((_) => {
+                        Navigator.pop(context),
+                      });
+                },
                 child: const Text(
                   "Agregar al carrito",
                   style: TextStyle(fontSize: 15, color: Color(0xFF016BC1)),

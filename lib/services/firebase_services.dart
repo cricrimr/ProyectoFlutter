@@ -52,12 +52,11 @@ Future<List> getPeople() async {
   return people; // y se retonar las personas
 }
 
-
-Future<List> getPeopleLow() async {
+Future<List> getItemsShoppingCar() async {
   // funcion asincrona
   List people = []; // se inicializa vacia
   // se habla a la bd osea se hace una refencia para poder traer la coleccion
-  CollectionReference collectionReferenceProducts = db.collection('articulos');
+  CollectionReference collectionReferenceProducts = db.collection('carrito');
   //query
   //cuiando se usa el get que sean procos registros
   QuerySnapshot queryProduts = await collectionReferenceProducts
@@ -82,16 +81,54 @@ Future<List> getPeopleLow() async {
   return people; // y se retonar las personas
 }
 
-Future<List> filterProductsByPrice(double maxPrice) async {
-  List products = await getPeople();
-  List filteredProducts = [];
-  for (var product in products) {
-    double price = double.tryParse(product['priceLow']) ?? double.tryParse(product['price']) ?? 0;
-    if (price <= maxPrice) {
-      filteredProducts.add(product);
-    }
-  }
-  return filteredProducts;
+Future<List> getProductsByPriceLow() async {
+  List products = [];
+  CollectionReference collectionReferenceProducts = db.collection('articulos');
+  QuerySnapshot queryProducts = await collectionReferenceProducts
+      .orderBy('priceLow', descending: false)
+      .get();
+  queryProducts.docs.forEach((documento) {
+    final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
+    final producto = {
+      "imageUrl": data['imageUrl'],
+      "descripcion": data['descripcion'],
+      "name": data['name'],
+      "price": data['price'],
+      "priceLow": data['priceLow'],
+      "entrega": data['entrega'],
+      "tEntrega": data['tEntrega'],
+      "cantidad": data['cantidad'],
+      "edia": data['edia'],
+      "id": documento.id,
+    };
+    products.add(producto);
+  });
+  return products;
+}
+
+Future<List> getProductsByPriceHigh() async {
+  List products = [];
+  CollectionReference collectionReferenceProducts = db.collection('articulos');
+  QuerySnapshot queryProducts = await collectionReferenceProducts
+      .orderBy('priceLow', descending: true)
+      .get();
+  queryProducts.docs.forEach((documento) {
+    final Map<String, dynamic> data = documento.data() as Map<String, dynamic>;
+    final producto = {
+      "imageUrl": data['imageUrl'],
+      "descripcion": data['descripcion'],
+      "name": data['name'],
+      "price": data['price'],
+      "priceLow": data['priceLow'],
+      "entrega": data['entrega'],
+      "tEntrega": data['tEntrega'],
+      "cantidad": data['cantidad'],
+      "edia": data['edia'],
+      "id": documento.id,
+    };
+    products.add(producto);
+  });
+  return products;
 }
 
 // lo de mayor y menos esl oque regresa la funcion
@@ -118,15 +155,15 @@ Future<void> addProducts(
   });
 }
 
-
 Future<void> addReport(
-    String name,
-    String descripcion,
-    String imageUrl,
-    String priceLow,
-    String entrega,
-    String tEntrega,
-    String eDia,) async {
+  String name,
+  String descripcion,
+  String imageUrl,
+  String priceLow,
+  String entrega,
+  String tEntrega,
+  String eDia,
+) async {
   await db.collection("report").add({
     "name": name,
     "imageUrl": imageUrl,
@@ -138,6 +175,29 @@ Future<void> addReport(
   });
 }
 
+Future<void> addShoppincard(
+  String name,
+  String descripcion,
+  String imageUrl,
+  String price,
+  String priceLow,
+  String entrega,
+  String tEntrega,
+  String eDia,
+  String cantidad,
+) async {
+  await db.collection("carrito").add({
+    "name": name,
+    "descripcion": descripcion,
+    "imageUrl": imageUrl,
+    "price": price,
+    "priceLow": priceLow,
+    "entrega": entrega,
+    "tEntrega": tEntrega,
+    "edia": eDia,
+    "cantidad": cantidad,
+  });
+}
 
 // actualizar
 Future<void> editProducts(
@@ -154,7 +214,7 @@ Future<void> editProducts(
   await db.collection("articulos").doc(id).set({
     "name": nuevoNombre,
     "descripcion": nuevadescripcion,
-    "imageUrl":nuevaimageUrl,
+    "imageUrl": nuevaimageUrl,
     "price": nuevoprice,
     "priceLow": nuevopriceLow,
     "entrega": nuevatEntrega,

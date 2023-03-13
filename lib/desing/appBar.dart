@@ -16,15 +16,21 @@ class _MyAppBarState extends State<MyAppBar> {
       title: Text('Bienvenido'),
       actions: <Widget>[
         IconButton(
+          icon: Icon(Icons.refresh),
+          onPressed: () {
+            Navigator.pushNamed(context, "/items");
+          },
+        ),
+        IconButton(
           icon: Icon(Icons.expand_more),
           onPressed: () {
-            // Acción al presionar el botón de buscar
+            Navigator.pushNamed(context, "/lowPrice");
           },
         ),
         IconButton(
           icon: Icon(Icons.expand_less),
           onPressed: () {
-            // Acción al presionar el botón de buscar
+            Navigator.pushNamed(context, "/highPrice");
           },
         ),
       ],

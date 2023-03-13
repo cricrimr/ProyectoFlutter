@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:proyectop_flutter/login/login.dart';
 import 'package:proyectop_flutter/services/firebase_services.dart';
+import 'package:proyectop_flutter/user/highPrice.dart';
 import 'package:proyectop_flutter/user/homeUser.dart';
+import 'package:proyectop_flutter/user/lowPrice.dart';
+import 'package:proyectop_flutter/user/shoppingCar.dart';
 import 'package:proyectop_flutter/user/showItem.dart';
 import 'package:proyectop_flutter/views/edit.dart';
 import 'package:proyectop_flutter/views/forms.dart';
@@ -34,6 +37,10 @@ class MyApp extends StatelessWidget {
         '/edit': (context) => const edit(),
         '/item': (context) => const itemGen(),
         '/reporte': (context) => Reporte(),
+        '/lowPrice': (context) => const HomeUserPriceLow(),
+        '/highPrice': (context) => const HomeUserPriceHigh(),
+        '/items': (context) => const HomeUser(),
+        '/carrito': (context) => const Carrito(),
       },
     );
   }

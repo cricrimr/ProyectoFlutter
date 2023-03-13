@@ -6,16 +6,16 @@ import 'package:proyectop_flutter/login/login.dart';
 
 import '../services/firebase_services.dart';
 
-class HomeUser extends StatefulWidget {
-  const HomeUser({
+class HomeUserPriceHigh extends StatefulWidget {
+  const HomeUserPriceHigh({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<HomeUser> createState() => _HomeUserState();
+  State<HomeUserPriceHigh> createState() => _HomeUserState();
 }
 
-class _HomeUserState extends State<HomeUser> {
+class _HomeUserState extends State<HomeUserPriceHigh> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +24,7 @@ class _HomeUserState extends State<HomeUser> {
         appBar: MyAppBar(),
         drawer: drawerPlantilla(),
         body: FutureBuilder(
-          future: getPeople(),
+          future: getProductsByPriceHigh(),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return GridView.builder(
