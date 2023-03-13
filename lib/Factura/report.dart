@@ -33,7 +33,6 @@ class _reporttState extends State<reportt> {
       subject2 = widget.docid.get('edia');
       subject3 = widget.docid.get('tEntrega');
       subject4 = widget.docid.get('priceLow');
-      subject5 = widget.docid.get('eDia');
     });
 
     super.initState();
