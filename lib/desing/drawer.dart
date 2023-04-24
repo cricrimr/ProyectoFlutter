@@ -30,12 +30,6 @@ class drawerPlantilla extends StatelessWidget {
             },
           ),
           ListTile(
-            title: Text('Opción 2'),
-            onTap: () {
-              // Acción a realizar cuando se seleccione esta opción
-            },
-          ),
-          ListTile(
             title: Text('Cerrar Sesion'),
             leading: IconButton(
               onPressed: () {

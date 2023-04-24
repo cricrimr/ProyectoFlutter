@@ -47,17 +47,32 @@ class _editState extends State<edit> {
             padding: const EdgeInsets.all(15.0),
             child: Column(
               children: [
+                Text(
+                  'Nombre del producto',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
                 TextField(
                   controller: nameController,
                   decoration: const InputDecoration(
                     hintText: 'Nombre del producto',
                   ),
                 ),
+                const SizedBox(height: 16),
+                Text(
+                  'Descripcion del producto',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
                 TextField(
+                  maxLines: 3,
                   controller: descripcionController,
                   decoration: const InputDecoration(
                     hintText: 'Descripcion del producto',
                   ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Precio del producto',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
                 TextField(
                   controller: priceController,
@@ -65,11 +80,21 @@ class _editState extends State<edit> {
                     hintText: 'Precio del producto',
                   ),
                 ),
+                const SizedBox(height: 16),
+                Text(
+                  'precio de descuento del producto',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                ),
                 TextField(
                   controller: priceLowController,
                   decoration: const InputDecoration(
                     hintText: 'precio de descuento del producto',
                   ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'cantidad de stock producto',
+                  style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                 ),
                 TextField(
                   controller: cantidadController,
@@ -80,6 +105,12 @@ class _editState extends State<edit> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      'Tipo de envio',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 45),
                     Container(
                       constraints: const BoxConstraints(
                         maxWidth: 1000,
@@ -118,6 +149,12 @@ class _editState extends State<edit> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      'Costo de envio',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 60),
                     Container(
                       constraints: const BoxConstraints(
                         maxWidth: 1000,
@@ -156,6 +193,12 @@ class _editState extends State<edit> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Text(
+                      'Fecha estimada de entrega',
+                      style: TextStyle(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(width: 16),
                     Container(
                       constraints: const BoxConstraints(
                         maxWidth: 1000,
