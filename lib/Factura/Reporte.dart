@@ -16,19 +16,9 @@ class _HomeState extends State<Reporte> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 0, 11, 133),
-        onPressed: () {
-          Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => addnote()));
-        },
-        child: Icon(
-          Icons.add,
-        ),
-      ),
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 11, 133),
-        title: Text('Students'),
+        backgroundColor: Color(0xFF016BC1),
+        title: Text('Reportes'),
       ),
       body: StreamBuilder(
         stream: _usersStream,
@@ -71,7 +61,6 @@ class _HomeState extends State<Reporte> {
                         ),
                         child: ListTile(
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
                             side: BorderSide(
                               color: Colors.black,
                             ),
@@ -82,10 +71,7 @@ class _HomeState extends State<Reporte> {
                               fontSize: 20,
                             ),
                           ),
-                          contentPadding: EdgeInsets.symmetric(
-                            vertical: 12,
-                            horizontal: 16,
-                          ),
+                          contentPadding: EdgeInsets.symmetric(),
                         ),
                       ),
                     ],

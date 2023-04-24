@@ -33,6 +33,7 @@ class _reporttState extends State<reportt> {
       subject2 = widget.docid.get('edia');
       subject3 = widget.docid.get('tEntrega');
       subject4 = widget.docid.get('priceLow');
+      subject5 = widget.docid.get('tEntrega');
     });
 
     super.initState();
@@ -150,6 +151,23 @@ class _reporttState extends State<reportt> {
                   ),
                 ],
               ),
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.center,
+                children: [
+                  pw.Text(
+                    'Tipo de entrega : ',
+                    style: pw.TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                  pw.Text(
+                    subject2,
+                    style: pw.TextStyle(
+                      fontSize: 25,
+                    ),
+                  ),
+                ],
+              ),
               pw.Divider(),
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.center,
@@ -179,7 +197,7 @@ class _reporttState extends State<reportt> {
                     ),
                   ),
                   pw.Text(
-                    subject4.toString(),
+                    subject5.toString(),
                     style: pw.TextStyle(
                       fontSize: 25,
                     ),

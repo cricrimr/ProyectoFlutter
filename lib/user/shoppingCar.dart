@@ -30,7 +30,8 @@ class _HomeUserState extends State<Carrito> {
                 return Dismissible(
                   key: Key(snapshot.data![index]['id']),
                   onDismissed: (direction) async {
-                    await deleteProducts(snapshot.data![index]['id']);
+                    await deleteProductsShoppingcar(
+                        snapshot.data![index]['id']);
                     snapshot.data?.removeAt(index);
                     setState(() {});
                   },

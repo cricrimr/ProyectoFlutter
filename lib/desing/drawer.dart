@@ -30,6 +30,12 @@ class drawerPlantilla extends StatelessWidget {
             },
           ),
           ListTile(
+            title: Text('Inicio'),
+            onTap: () {
+              Navigator.pushNamed(context, '/items');
+            },
+          ),
+          ListTile(
             title: Text('Cerrar Sesion'),
             leading: IconButton(
               onPressed: () {

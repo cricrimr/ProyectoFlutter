@@ -228,3 +228,8 @@ Future<void> editProducts(
 Future<void> deleteProducts(String id) async {
   await db.collection("articulos").doc(id).delete();
 }
+
+// eliminar car
+Future<void> deleteProductsShoppingcar(String id) async {
+  await db.collection("carrito").doc(id).delete();
+}

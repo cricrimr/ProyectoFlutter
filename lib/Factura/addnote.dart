@@ -14,7 +14,7 @@ class addnote extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 11, 133),
+        backgroundColor: Color(0xFF016BC1),
         actions: [
           MaterialButton(
             onPressed: () {

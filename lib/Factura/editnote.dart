@@ -33,7 +33,8 @@ class _editnoteState extends State<editnote> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 0, 11, 133),
+        backgroundColor: Color(0xFF016BC1),
+        title: Text('Informacion del reporte'),
       ),
       body: Container(
         width: double.infinity,
@@ -41,6 +42,7 @@ class _editnoteState extends State<editnote> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
+            Text("Informacion del producto en venta"),
             SizedBox(
               height: 20,
             ),
@@ -79,7 +81,7 @@ class _editnoteState extends State<editnote> {
               height: 20,
             ),
             MaterialButton(
-              color: Color.fromARGB(255, 0, 11, 133),
+              color: Color(0xFF016BC1),
               onPressed: () {
                 Navigator.push(
                   context,
