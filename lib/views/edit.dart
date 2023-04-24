@@ -1,6 +1,9 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:proyectop_flutter/services/seleccionarImagen.dart';
 import '../services/firebase_services.dart';
+import '../services/seleccionarImagen.dart';
 
 class edit extends StatefulWidget {
   const edit({super.key});
@@ -8,6 +11,9 @@ class edit extends StatefulWidget {
   @override
   State<edit> createState() => _editState();
 }
+
+File? imagen_to_upload;
+String? imageUrl;
 
 class _editState extends State<edit> {
   TextEditingController nameController =
@@ -239,13 +245,46 @@ class _editState extends State<edit> {
                     ),
                   ],
                 ),
+                // DropdownButton
+                const SizedBox(
+                  height: 20,
+                ),
+                imagen_to_upload != null
+                    ? Image.file(imagen_to_upload!)
+                    : Container(
+                        margin: const EdgeInsets.all(10),
+                        height: 100,
+                        width: double.infinity,
+                        color: Colors.grey[200],
+                      ),
                 ElevatedButton(
                   onPressed: () async {
+                    final imagen = await getImagen();
+                    setState(() {
+                      imagen_to_upload = File(imagen!.path);
+                    });
+                  },
+                  child: const Text('Seleccionar imagen'),
+                  style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Color(0xFF016BC1)),
+                  ),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    if (imagen_to_upload == null) {
+                      return;
+                    }
+
+                    final uploaded = await subirImagen(imagen_to_upload!);
+
+                    final imageUrl = await subirImagen(imagen_to_upload!);
+
                     await editProducts(
                             argumentos['id'],
                             nameController.text,
                             descripcionController.text,
-                            imageUrlController.text,
+                            imageUrl,
                             priceController.text,
                             priceLowController.text,
                             dropdownValue,

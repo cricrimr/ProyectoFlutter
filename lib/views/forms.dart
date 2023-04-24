@@ -334,7 +334,7 @@ class _formsState extends State<Forms> {
                           }
                           final uploaded = await subirImagen(imagen_to_upload!);
 
-                          final imageUrl = await subirImagen(imagen_to_upload!);
+                          final imageUrl = await subirImagen(imagen_to_upload!); 
 
                           await addProducts(
                                   nameController.text,
